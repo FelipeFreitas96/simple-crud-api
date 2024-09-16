@@ -5,24 +5,33 @@ import { Card } from '../../schemas/card.schema';
 import { Model } from 'mongoose';
 import { CardEntity } from 'src/domain/entities/card.entities';
 import { CardMapper } from 'src/domain/mappers/card.mapper';
-import { CreateCardDTO, UpdateCardDTO } from 'src/infrastructure/dtos/card.dto';
+import {
+  CreateCardDTO,
+  DeleteCardDTO,
+  GetCardDTO,
+  UpdateCardDTO,
+} from 'src/infrastructure/dtos/card.dto';
 
 @Injectable()
 export class CardRepository implements ICardRepository {
   constructor(@InjectModel(Card.name) private cardModel: Model<Card>) {}
-  async getCardById(props: Pick<CardEntity, 'id'>): Promise<CardEntity> {
-    const card = await this.cardModel.findById(props.id);
+  async getCardById(props: GetCardDTO): Promise<CardEntity> {
+    const card = await this.cardModel.findOne({ _id: props.id });
+    if (!card) return null;
     return CardMapper(card);
   }
   async getCards(): Promise<CardEntity[]> {
     const cards = await this.cardModel.find();
     return cards.map(CardMapper);
   }
-  async updateCard(props: Pick<CardEntity, 'id'>, updateProps: UpdateCardDTO) {
+  async updateCard(props: GetCardDTO, updateProps: UpdateCardDTO) {
     const card = await this.cardModel.findByIdAndUpdate(props.id, updateProps);
+    if (!card) return null;
     return CardMapper(card);
   }
-  async deleteCard(props: Pick<CardEntity, 'id'>) {
+  async deleteCard(props: DeleteCardDTO) {
+    const card = await this.cardModel.findOne({ _id: props.id });
+    if (!card) return null;
     await this.cardModel.findByIdAndDelete(props.id);
   }
   async addCard(props: CreateCardDTO): Promise<CardEntity> {
@@ -30,6 +39,7 @@ export class CardRepository implements ICardRepository {
       description: props.description,
       title: props.title,
     });
+    if (!card) return null;
     return CardMapper(card);
   }
 }
