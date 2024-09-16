@@ -1,8 +1,5 @@
-import {
-  CreateCardDTO,
-  ICard,
-  UpdateCardDTO,
-} from '../entities/card.entities';
+import { CreateCardDTO, UpdateCardDTO } from 'src/infrastructure/dtos/card.dto';
+import { ICard } from '../entities/card.entities';
 
 export interface ICardRepository {
   addCard(props: CreateCardDTO): Promise<ICard>;
