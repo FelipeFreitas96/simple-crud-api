@@ -39,8 +39,9 @@ docker-compose up -d
 
 - Application: [http://localhost:3000](http://localhost:3000)
 
-- Swagger: 
-[http://localhost:3000/swagger](http://localhost:3000/swagger)
+- Swagger: [http://localhost:3000/swagger](http://localhost:3000/swagger)
+
+![alt text](https://i.imgur.com/MJwzKvl.png)
 
 ## Technologies Used
 
