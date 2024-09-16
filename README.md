@@ -9,6 +9,12 @@ Este projeto é uma API simples de CRUD, desenvolvida com o objetivo de avaliar 
 
 A aplicação visa gerenciar tarefas, permitindo ao usuário criar, editar, marcar como concluída e excluir tarefas de uma lista. A aplicação está conteinerizada para garantir portabilidade, permitindo que seja executada em qualquer máquina com Docker. O projeto também conta com uma documentação utilizando o Swagger.
 
+## Arquitetura
+
+O projeto utiliza conceitos de arquitetura limpa dividido em camadas, seguindo o modelo:
+
+![alt text](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+
 ## Requisitos
 
 - Docker
@@ -43,7 +49,7 @@ docker-compose up -d
 - Nest@^10.0.0
 - Docker
 
-## Estrutura MongoDB
+## Schema MongoDB
 
 ```js
 {
