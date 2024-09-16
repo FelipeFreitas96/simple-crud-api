@@ -36,6 +36,11 @@ export class CardRepositoryMock {
   }
   async deleteCard(props: DeleteCardDTO) {
     if (props.id === INVALID_ID) return null;
+    return {
+      id: VALID_ID,
+      title: 'valid_title',
+      description: 'valid_description',
+    };
   }
   async addCard(props: CreateCardDTO): Promise<CardEntity> {
     return {

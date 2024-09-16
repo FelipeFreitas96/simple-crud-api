@@ -77,12 +77,11 @@ describe('CardUsecases', () => {
         description: 'valid_description',
       };
 
-      jest.spyOn(cardRepository, 'getCardById').mockResolvedValueOnce(result);
-      jest.spyOn(cardRepository, 'deleteCard').mockResolvedValueOnce(null);
-      expect(await cardUsecases.deleteCard({ id: 'valid_id' })).toBeNull();
+      jest.spyOn(cardRepository, 'deleteCard').mockResolvedValueOnce(result);
+      expect(await cardUsecases.deleteCard({ id: 'valid_id' })).toEqual(result);
     });
     it('should throw if card is not found', async () => {
-      jest.spyOn(cardRepository, 'getCardById').mockResolvedValueOnce(null);
+      jest.spyOn(cardRepository, 'deleteCard').mockResolvedValueOnce(null);
       await expect(
         cardUsecases.deleteCard({ id: 'invalid_id' }),
       ).rejects.toThrow('Not Found Exception');

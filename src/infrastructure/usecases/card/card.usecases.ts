@@ -44,10 +44,10 @@ export class CardUsecases {
   }
 
   async deleteCard(dto: DeleteCardDTO) {
-    const card = await this.cardRepository.getCardById({ id: dto.id });
+    const card = await this.cardRepository.deleteCard({ id: dto.id });
     if (!card) {
       throw new NotFoundException(['Card not found']);
     }
-    return this.cardRepository.deleteCard({ id: dto.id });
+    return card;
   }
 }

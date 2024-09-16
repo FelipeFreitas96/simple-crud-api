@@ -40,7 +40,7 @@ export class CardController {
       description: body.description,
     });
   }
- 
+
   @Delete(':id')
   async deleteCard(@Param() param: DeleteCardDTO) {
     return this.cardUsecases.deleteCard({ id: param.id });

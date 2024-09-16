@@ -9,5 +9,5 @@ export interface ICardRepository {
     props: Pick<CardEntity, 'id'>,
     updateProps: UpdateCardDTO,
   ): Promise<CardEntity>;
-  deleteCard(props: Pick<CardEntity, 'id'>): Promise<void>;
+  deleteCard(props: Pick<CardEntity, 'id'>): Promise<CardEntity>;
 }

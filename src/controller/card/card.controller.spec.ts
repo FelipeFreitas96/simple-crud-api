@@ -88,7 +88,11 @@ describe('CardController', () => {
         .delete('/' + VALID_ID)
         .expect(200);
 
-      expect(response.body).toEqual({});
+      expect(response.body).toEqual({
+        id: VALID_ID,
+        title: 'valid_title',
+        description: 'valid_description',
+      });
     });
     it('should throw when receive an invalid card', async () => {
       const response = await request(app.getHttpServer())

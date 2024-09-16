@@ -30,9 +30,9 @@ export class CardRepository implements ICardRepository {
     return CardMapper(card);
   }
   async deleteCard(props: DeleteCardDTO) {
-    const card = await this.cardModel.findOne({ _id: props.id });
+    const card = await this.cardModel.findByIdAndDelete(props.id);
     if (!card) return null;
-    await this.cardModel.findByIdAndDelete(props.id);
+    return CardMapper(card);
   }
   async addCard(props: CreateCardDTO): Promise<CardEntity> {
     const card = await this.cardModel.create({
