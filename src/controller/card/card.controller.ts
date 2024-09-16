@@ -13,7 +13,7 @@ import {
   DeleteCardDTO,
   GetCardDTO,
   UpdateCardDTO,
-} from 'src/infrastructure/dtos/card.dto';
+} from '../../infrastructure/dtos/card.dto';
 
 @Controller()
 export class CardController {
@@ -40,7 +40,7 @@ export class CardController {
       description: body.description,
     });
   }
-
+ 
   @Delete(':id')
   async deleteCard(@Param() param: DeleteCardDTO) {
     return this.cardUsecases.deleteCard({ id: param.id });

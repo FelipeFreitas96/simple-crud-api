@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ICardRepository } from 'src/domain/repositories/cardRepository.interface';
+import { ICardRepository } from '../../../domain/repositories/cardRepository.interface';
 import { Card } from '../../schemas/card.schema';
 import { Model } from 'mongoose';
-import { CardEntity } from 'src/domain/entities/card.entities';
-import { CardMapper } from 'src/domain/mappers/card.mapper';
+import { CardEntity } from '../../../domain/entities/card.entities';
+import { CardMapper } from '../../../domain/mappers/card.mapper';
 import {
   CreateCardDTO,
   DeleteCardDTO,

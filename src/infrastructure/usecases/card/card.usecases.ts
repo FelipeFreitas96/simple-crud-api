@@ -20,7 +20,7 @@ export class CardUsecases {
   async getCardById(dto: GetCardDTO) {
     const card = await this.cardRepository.getCardById({ id: dto.id });
     if (!card) {
-      throw new NotFoundException('Card not found');
+      throw new NotFoundException(['Card not found']);
     }
     return card;
   }
@@ -32,7 +32,7 @@ export class CardUsecases {
   async updateCard(id: string, dto: UpdateCardDTO) {
     const card = await this.cardRepository.getCardById({ id });
     if (!card) {
-      throw new NotFoundException('Card not found');
+      throw new NotFoundException(['Card not found']);
     }
 
     await this.cardRepository.updateCard(
@@ -46,7 +46,7 @@ export class CardUsecases {
   async deleteCard(dto: DeleteCardDTO) {
     const card = await this.cardRepository.getCardById({ id: dto.id });
     if (!card) {
-      throw new NotFoundException('Card not found');
+      throw new NotFoundException(['Card not found']);
     }
     return this.cardRepository.deleteCard({ id: dto.id });
   }
