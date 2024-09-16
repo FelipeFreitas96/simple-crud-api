@@ -1,6 +1,7 @@
-import { ICard } from 'src/domain/entities/card.entities';
+import { OmitType, PickType } from '@nestjs/swagger';
+import { CardEntity } from 'src/domain/entities/card.entities';
 
-export type CreateCardDTO = Omit<ICard, 'id'>;
-export type UpdateCardDTO = Partial<ICard>;
-export type GetCardDTO = Pick<ICard, 'id'>;
-export type DeleteCardDTO = Pick<ICard, 'id'>;
+export class CreateCardDTO extends OmitType(CardEntity, ['id']) {}
+export class UpdateCardDTO extends OmitType(CardEntity, ['id']) {}
+export class GetCardDTO extends PickType(CardEntity, ['id']) {}
+export class DeleteCardDTO extends PickType(CardEntity, ['id']) {}

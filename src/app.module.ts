@@ -2,6 +2,6 @@ import { Module } from '@nestjs/common';
 import { CardControllerModule } from './controller/card/card.module';
 
 @Module({
-  providers: [CardControllerModule],
+  imports: [CardControllerModule],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CardRepository } from '../../repositories/card/card.repository';
 import {
   CreateCardDTO,
@@ -10,7 +10,6 @@ import {
 @Injectable()
 export class CardUsecases {
   constructor(private readonly cardRepository: CardRepository) {}
-  // create
   async createCard(dto: CreateCardDTO) {
     return this.cardRepository.addCard({
       title: dto.title,
@@ -18,26 +17,37 @@ export class CardUsecases {
     });
   }
 
-  // read
   async getCardById(dto: GetCardDTO) {
-    return this.cardRepository.getCardById({ id: dto.id });
+    const card = await this.cardRepository.getCardById({ id: dto.id });
+    if (!card) {
+      throw new NotFoundException('Card not found');
+    }
+    return card;
   }
 
-  // get all
   async getCards() {
     return this.cardRepository.getCards();
   }
 
-  // update
-  async updateCard(dto: UpdateCardDTO) {
-    return this.cardRepository.updateCard(
-      { id: dto.id },
+  async updateCard(id: string, dto: UpdateCardDTO) {
+    const card = await this.cardRepository.getCardById({ id });
+    if (!card) {
+      throw new NotFoundException('Card not found');
+    }
+
+    await this.cardRepository.updateCard(
+      { id },
       { title: dto.title, description: dto.description },
     );
+
+    return this.cardRepository.getCardById({ id });
   }
 
-  // delete
   async deleteCard(dto: DeleteCardDTO) {
+    const card = await this.cardRepository.getCardById({ id: dto.id });
+    if (!card) {
+      throw new NotFoundException('Card not found');
+    }
     return this.cardRepository.deleteCard({ id: dto.id });
   }
 }

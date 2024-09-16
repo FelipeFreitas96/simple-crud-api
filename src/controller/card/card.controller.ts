@@ -30,8 +30,7 @@ export class CardController {
 
   @Put(':id')
   async updateCard(@Param('id') id: string, @Body() body: UpdateCardDTO) {
-    return this.cardUsecases.updateCard({
-      id,
+    return this.cardUsecases.updateCard(id, {
       title: body.title,
       description: body.description,
     });

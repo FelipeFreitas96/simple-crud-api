@@ -5,6 +5,7 @@ import { CardRepository } from './card.repository';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost:27017/database'),
     MongooseModule.forFeature([{ name: Card.name, schema: CardSchema }]),
   ],
   providers: [CardRepository],
